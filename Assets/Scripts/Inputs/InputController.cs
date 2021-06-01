@@ -1,18 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [HideInInspector] public Unit cc;
+    public void InitializeController(Unit baseController)
     {
-        
-    }
+        cc = baseController;
 
-    // Update is called once per frame
-    void Update()
+        InputEvents.Event_StartShoot.AddListener(StartShoot);
+    }
+    public virtual Vector2 MoveInput()
     {
-        
+        return InputEvents.GetMoveInput();
+    }
+    public virtual Vector2 RotateInput()
+    {
+        return InputEvents.GetRotateInput();
+    }
+    protected virtual void StartShoot()
+    {
+        cc.shooting.StartShoot();
+    }
+    protected virtual void StopShoot()
+    {
+        cc.shooting.StopShoot();
     }
 }
