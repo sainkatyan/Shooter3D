@@ -16,6 +16,6 @@ MonoBehaviour:
   _timeFireRate: 0.2
   _timeRecharge: 2
   _attackDamage: 1
-  _icon: {fileID: 21300000, guid: 60296256b87b01b48b4f79b4b8c3d43b, type: 3}
+  _icon: {fileID: 21300000, guid: 1956dca25eed5d044a477ff80e514516, type: 3}
   _countOfShoot: 1
   _shootType: 0
