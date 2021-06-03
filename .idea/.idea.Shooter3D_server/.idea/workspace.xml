@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e869f03c-67c8-4908-a2f3-c9060a7f0338" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inputs/CharacterControl.inputactions.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inputs/CharacterControl.inputactions.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/IPlayer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/IPlayer.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shooter3D_server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shooter3D_server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inputs/InputController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inputs/InputController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +23,8 @@
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Scripts/Inputs/InputEvents.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Inputs/InputController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/IUnit.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/IPlayer.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tLZR0im0yt8dkecGgsy7IqBbEV" />
@@ -68,6 +73,8 @@
       <workItem from="1622551477313" duration="208000" />
       <workItem from="1622551732512" duration="2335000" />
       <workItem from="1622554092280" duration="22000" />
+      <workItem from="1622620396567" duration="77000" />
+      <workItem from="1622620500727" duration="145000" />
     </task>
     <servers />
   </component>
@@ -76,6 +83,17 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

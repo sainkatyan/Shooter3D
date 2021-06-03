@@ -41,6 +41,14 @@ public class @CharacterControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChangeWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""7476d81f-0790-449a-a3d9-6211ba99474a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -153,6 +161,28 @@ public class @CharacterControl : IInputActionCollection, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7146f519-3fcd-4dbc-9fb6-a9d08c2fd0d7"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aae128cf-8a28-4015-880c-d345828ef24e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +194,7 @@ public class @CharacterControl : IInputActionCollection, IDisposable
         m_Character_Move = m_Character.FindAction("Move", throwIfNotFound: true);
         m_Character_Rotate = m_Character.FindAction("Rotate", throwIfNotFound: true);
         m_Character_Shoot = m_Character.FindAction("Shoot", throwIfNotFound: true);
+        m_Character_ChangeWeapon = m_Character.FindAction("ChangeWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,6 +247,7 @@ public class @CharacterControl : IInputActionCollection, IDisposable
     private readonly InputAction m_Character_Move;
     private readonly InputAction m_Character_Rotate;
     private readonly InputAction m_Character_Shoot;
+    private readonly InputAction m_Character_ChangeWeapon;
     public struct CharacterActions
     {
         private @CharacterControl m_Wrapper;
@@ -223,6 +255,7 @@ public class @CharacterControl : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Character_Move;
         public InputAction @Rotate => m_Wrapper.m_Character_Rotate;
         public InputAction @Shoot => m_Wrapper.m_Character_Shoot;
+        public InputAction @ChangeWeapon => m_Wrapper.m_Character_ChangeWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -241,6 +274,9 @@ public class @CharacterControl : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnShoot;
+                @ChangeWeapon.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnChangeWeapon;
+                @ChangeWeapon.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnChangeWeapon;
+                @ChangeWeapon.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnChangeWeapon;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -254,6 +290,9 @@ public class @CharacterControl : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @ChangeWeapon.started += instance.OnChangeWeapon;
+                @ChangeWeapon.performed += instance.OnChangeWeapon;
+                @ChangeWeapon.canceled += instance.OnChangeWeapon;
             }
         }
     }
@@ -263,5 +302,6 @@ public class @CharacterControl : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnChangeWeapon(InputAction.CallbackContext context);
     }
 }

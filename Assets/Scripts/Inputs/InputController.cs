@@ -6,12 +6,15 @@ using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
-    [HideInInspector] public Unit cc;
+    [HideInInspector] public Unit unit;
     public void InitializeController(Unit baseController)
     {
-        cc = baseController;
+        unit = baseController;
 
         InputEvents.Event_StartShoot.AddListener(StartShoot);
+        InputEvents.Event_StopShoot.AddListener(StopShoot);
+
+        InputEvents.Event_StartChangingWeapon.AddListener(ChangeWeapon);
     }
     public virtual Vector2 MoveInput()
     {
@@ -21,12 +24,16 @@ public class InputController : MonoBehaviour
     {
         return InputEvents.GetRotateInput();
     }
-    protected virtual void StartShoot()
+    public virtual void StartShoot()
     {
-        cc.shooting.StartShoot();
+        unit.shooting.StartShoot();
     }
-    protected virtual void StopShoot()
+    public virtual void StopShoot()
     {
-        cc.shooting.StopShoot();
+        unit.shooting.StopShoot();
+    }
+    public virtual void ChangeWeapon()
+    {
+        unit.shooting.ChangeSlot();
     }
 }
