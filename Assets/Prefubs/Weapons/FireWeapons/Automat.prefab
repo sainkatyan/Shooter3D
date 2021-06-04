@@ -108,13 +108,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponSetting: {fileID: 11400000, guid: 7d4c70b5f5799da48b2d99d0d869fa85, type: 2}
-  zoneOfDamage: 100
-  distanceOfDamage: 40
   firePivot: {fileID: 8792663679874826278}
-  _fireTimer: 0
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 260
+  _bullet: {fileID: 3534197665696658315, guid: 25773d6fd6c73fd46a083ca778b46252, type: 3}
 --- !u!1 &4672879302904844788
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4672879302904844788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.58}
+  m_LocalPosition: {x: 0, y: 0, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3804543041552640312}
