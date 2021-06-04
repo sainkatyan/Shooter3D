@@ -10,6 +10,8 @@ public class Unit : MonoBehaviour, IUnit
     public WeaponController shooting;
     public CameraMovement cameraMovement;
 
+    private float hp = 100f;
+
     private void Awake()
     {
         inputController = gameObject.AddComponent<InputController>();
@@ -18,8 +20,17 @@ public class Unit : MonoBehaviour, IUnit
         unitMovement.Init(inputController, cameraMovement);
         cameraMovement.Init(inputController, unitMovement);
     }
-    public void Kill()
+    public void Damage(DamageModel model)
     {
-        Debug.Log("dead");
+        hp -= model.damage;
+        if (hp <= 0f)
+        {
+            Death(model);
+        }
+    }
+
+    private void Death(DamageModel damageModel)
+    {
+        Debug.Log("DEATH");
     }
 }

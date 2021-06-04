@@ -11,8 +11,10 @@ public class WeaponSettings : ScriptableObject
     [SerializeField] private float _timeRecharge;
     [SerializeField] private float _attackDamage;
     [SerializeField] private Sprite _icon;
-    [SerializeField] private int _countOfShoot; //shootgun
-    [SerializeField]private ShootType _shootType; 
+    [SerializeField] private int _countOfShoot; 
+    [SerializeField]private ShootType _shootType;
+    //extra settings
+    [SerializeField] private int _bulletsInMagazine;
 
     public int Id
     {
@@ -25,7 +27,6 @@ public class WeaponSettings : ScriptableObject
     {
         get
         {
-            //скорострельность
             return _timeFireRate;
         }
     }
@@ -33,7 +34,6 @@ public class WeaponSettings : ScriptableObject
     {
         get
         {
-            //время перезарядки
             return _timeRecharge;
         }
     }
@@ -64,6 +64,13 @@ public class WeaponSettings : ScriptableObject
         get
         {
             return _shootType;
+        }
+    }
+    public int BulletsInMagazine
+    {
+        get
+        {
+            return _bulletsInMagazine;
         }
     }
 }

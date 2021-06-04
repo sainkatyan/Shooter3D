@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IUnit 
+public class Bullet : MonoBehaviour
 {
-    void Damage(DamageModel model);
+
 }
