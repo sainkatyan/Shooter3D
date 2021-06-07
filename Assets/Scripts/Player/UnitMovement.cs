@@ -16,8 +16,7 @@ public class UnitMovement : MonoBehaviour
     {
         _rigidUnit = GetComponent<Rigidbody>();
 
-        //need to be visible = true in menu
-        Cursor.visible = false;
+        
     }
 
     public void Init(InputController inputController, CameraMovement cameraMovement)

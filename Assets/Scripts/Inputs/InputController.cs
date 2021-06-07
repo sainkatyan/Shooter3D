@@ -15,6 +15,10 @@ public class InputController : MonoBehaviour
         InputEvents.Event_StopShoot.AddListener(StopShoot);
 
         InputEvents.Event_StartChangingWeapon.AddListener(ChangeWeapon);
+
+        //need to be visible = true in menu
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public virtual Vector2 MoveInput()
     {

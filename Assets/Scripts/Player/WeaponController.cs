@@ -26,8 +26,6 @@ public class WeaponController : MonoBehaviour
         EquippedWeapon = Instantiate(newWeapon, _weaponPivot.position, _weaponPivot.rotation);
         EquippedWeapon.transform.SetParent(_weaponPivot);
         _equippedWeaponPrefub = EquippedWeapon;
-
-        Debug.Log("equipped name: " + _equippedWeaponPrefub.name);
     }
 
     public void StartShoot()

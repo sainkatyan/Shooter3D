@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : UnitBase
+public class SpawnPoint : MonoBehaviour
 {
-
+    public bool _isPerson = false;
 }

@@ -7,22 +7,16 @@ public class FireWeapon : BaseWeapon
     [SerializeField] private WeaponSettings _weaponSetting;
     private float distanceOfDamage = 40f;
     [SerializeField] private Transform firePivot;
-
-    private int _idWeapon;
-    private float _timeFireRate;
-    private float _timeRecharge;
-    private float _damage;
-    private Sprite _icon;
+  
+    //extra set settings
     private int _countOfShoot; 
     private ShootType _shootType;
     private int _bulletsInMagazine;
 
-    private bool _isShooting = false;
     private bool _isRecharging = false;
     private float _fireTimer;
 
     public LayerMask ignoreLayer;
-
     private float _zoneOfDamage = 10f;
     private int _currentBulletsInMagazine;
     private float _oneBulletDamage;
@@ -32,19 +26,16 @@ public class FireWeapon : BaseWeapon
 
     private void Start()
     {
-        SetSettings();
+        SetSettings(_weaponSetting);
         GetStartSettings();
     }
-    private void SetSettings()
+    protected override void SetSettings(WeaponSettings weaponSettings)
     {
-        _idWeapon = _weaponSetting.Id;
-        _timeFireRate = _weaponSetting.TimeFireRate;
-        _timeRecharge = _weaponSetting.TimeRecharge;
-        _damage = _weaponSetting.AttackDamage;
-        _icon = _weaponSetting.Icon;
-        _countOfShoot = _weaponSetting.CountOfShoot;
-        _shootType = _weaponSetting.ShootType;
-        _bulletsInMagazine = _weaponSetting.BulletsInMagazine;
+        base.SetSettings(weaponSettings);
+
+        _countOfShoot = weaponSettings.CountOfShoot;
+        _shootType = weaponSettings.ShootType;
+        _bulletsInMagazine = weaponSettings.BulletsInMagazine;
     }
 
     private void GetStartSettings()
@@ -109,49 +100,40 @@ public class FireWeapon : BaseWeapon
     #endregion
     private void AutomateShot()
     {
-        Debug.Log("Automate SHOT");
+        Ray ray = new Ray(firePivot.position, firePivot.forward);
+        Shoot(ray);
+
+        _fireTimer = _timeFireRate;
+    }
+    private void ManualShot()
+    {
+        Vector3 dirAndDistanceOfSphere = firePivot.forward * _zoneOfDamage;
+        for (int i = 0; i < _countOfShoot; i++)
+        {
+            var bulletTargetDir = SetBulletTargetDir(dirAndDistanceOfSphere);
+            Ray ray = new Ray(firePivot.position, bulletTargetDir);
+            Shoot(ray);
+        }
+
+        _fireTimer = _timeFireRate;
+    }
+
+    private void Shoot(Ray ray)
+    {
         RaycastHit hit;
-        var hitchek = Physics.Raycast(firePivot.position, firePivot.forward, out hit, distanceOfDamage, ~ignoreLayer);
+        var hitchek = Physics.Raycast(ray, out hit, distanceOfDamage, ~ignoreLayer);
         if (hitchek)
         {
-            Debug.Log("hit");
             CreateVisualBullet(hit.point);
             CheckIUnit(hit);
             //Debug.DrawLine(firePivot.position, hit.point, Color.red, 1f);
         }
         else
         {
-            var targetBulletPos = firePivot.transform.forward * distanceOfDamage;
+            var targetBulletPos = firePivot.position + ray.direction * distanceOfDamage;
             CreateVisualBullet(targetBulletPos);
-            //Debug.DrawRay(firePivot.position, targetBulletPos, Color.blue, 3f);
+            //Debug.DrawLine(firePivot.position, targetBulletPos, Color.blue, 3f);
         }
-        _fireTimer = _timeFireRate;
-    }
-    private void ManualShot()
-    {
-        Debug.Log("Manual SHOT");
-        Vector3 dirAndDistanceOfSphere = firePivot.forward * _zoneOfDamage;
-        for (int i = 0; i < _countOfShoot; i++)
-        {
-            var bulletTargetDir = SetBulletTargetDir(dirAndDistanceOfSphere);
-
-            RaycastHit hit;
-            var hitchek = Physics.Raycast(firePivot.position, bulletTargetDir, out hit, distanceOfDamage, ~ignoreLayer);
-            if (hitchek)
-            {
-                CreateVisualBullet(hit.point);
-                CheckIUnit(hit);
-                //Debug.DrawLine(firePivot.position, hit.point, Color.red, 1f);
-            }
-            else
-            {
-                var targetBulletPos = firePivot.position + bulletTargetDir * distanceOfDamage;
-                CreateVisualBullet(targetBulletPos);
-                //Debug.DrawLine(firePivot.position, targetBulletPos, Color.blue, 3f);
-            }
-        }
-
-        _fireTimer = _timeFireRate;
     }
     private Vector3 SetBulletTargetDir(Vector3 tempDirAndDistanceOfSphere)
     {
@@ -168,21 +150,13 @@ public class FireWeapon : BaseWeapon
 
     private void CheckIUnit(RaycastHit tempHit)
     {
-        IUnit damageInterface = null;
-        tempHit.transform.TryGetComponent<IUnit>(out damageInterface);
+        IDamagable damageInterface = null;
+        tempHit.transform.TryGetComponent<IDamagable>(out damageInterface);
 
         if (damageInterface != null)
         {
             DamageModel damageModel = new DamageModel(idAttacker, _idWeapon, _oneBulletDamage);
             damageInterface.Damage(damageModel);
         }
-    }
-    public override void StartShoot()
-    {
-        _isShooting = true;
-    }
-    public override void StopShoot()
-    {
-        _isShooting = false;
     }
 }
