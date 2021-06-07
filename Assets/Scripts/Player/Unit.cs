@@ -9,7 +9,9 @@ public class Unit : UnitBase
     public UnitMovement unitMovement;
     public WeaponController shooting;
     public CameraMovement cameraMovement;
+
     public Health health;
+    public Fraction unitFraction;
 
     private void Awake()
     {
@@ -21,13 +23,4 @@ public class Unit : UnitBase
 
         health = GetComponent<Health>();
     }
-    private void Start()
-    {
-        //base.SetUnitSettings();
-    }
-
-    //public override void Damage(DamageModel model)
-    //{
-    //    health.TakeDamage(model);
-    //}
 }

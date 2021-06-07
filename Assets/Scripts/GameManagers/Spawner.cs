@@ -27,21 +27,22 @@ public class Spawner : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        SpawnBaseUnit(_player, _playerSpawnPoint[Random.Range(0, _playerSpawnPoint.Length - 1)]);
+        SpawnBaseUnit(_player, _playerSpawnPoint[Random.Range(0, _playerSpawnPoint.Length - 1)], FractionUnit.Blue);
     }
 
     private void SpawnEnemies()
     {
         for (int i = 0; i < _enemySpawnPoints.Length; i++)
         {
-            SpawnBaseUnit(_enemy, _enemySpawnPoints[i]);
+            SpawnBaseUnit(_enemy, _enemySpawnPoints[i], FractionUnit.Red);
         }
     }
 
-    public static void SpawnBaseUnit(UnitBase unitPerson, SpawnPoint spawnPoint)
+    public static void SpawnBaseUnit(UnitBase unitPerson, SpawnPoint spawnPoint, FractionUnit fraction)
     {
         var spawnerUnit = Instantiate(unitPerson, spawnPoint.transform.position, Quaternion.identity);
         spawnerUnit.SetSpawnerTransform(spawnPoint);
+        spawnerUnit.SetFraction(fraction);
 
         UnitsHolder.AddUnit(spawnerUnit);
     }
@@ -58,6 +59,6 @@ public class Spawner : MonoBehaviour
     public static IEnumerator RebirthEnemy(float time, SpawnPoint spawnPoint)
     {
         yield return new WaitForSeconds(time);
-        SpawnBaseUnit(instance._enemy, spawnPoint);
+        SpawnBaseUnit(instance._enemy, spawnPoint, FractionUnit.Red);
     }
 }

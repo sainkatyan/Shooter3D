@@ -1,13 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 public class Health : MonoBehaviour
 {
     public event Action<float, float> HealthUpdate = delegate { };
 
-    private UnitBase unitBase;
+    private Color neutralColor = Color.white;
+    private Color playerColor = Color.blue;
+    private Color enemyColor = Color.red;
+
     public Transform indicator;
+    public Image ProgressBar;
+
+    private UnitBase _unitBase;
     private Transform _mainCameraTrans;
     private bool _isDead = false;
 
@@ -46,11 +53,31 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        unitBase = GetComponent<UnitBase>();
+        _unitBase = GetComponent<UnitBase>();
+        SetProgressBarColor(_unitBase);
+
         _mainCameraTrans = Camera.main.transform;
 
         currentHealth = _startHealth;
         _isDead = false;
+    }
+
+    private void SetProgressBarColor(UnitBase unitBase)
+    {
+        switch (unitBase.fraction)
+        {
+            case FractionUnit.Neutral:
+                ProgressBar.color = neutralColor;
+                break;
+            case FractionUnit.Blue:
+                ProgressBar.color = playerColor;
+                break;
+            case FractionUnit.Red:
+                ProgressBar.color = enemyColor;
+                break;
+            default:
+                break;
+        }
     }
 
     private void Update()
@@ -83,6 +110,7 @@ public class Health : MonoBehaviour
 
     public void Kill(DamageModel damageModel)
     {
-        Spawner.KillEnemyUnit(unitBase);
+        Spawner.KillEnemyUnit(_unitBase);
+        //Создать ленту событий
     }
 }
