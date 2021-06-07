@@ -4,8 +4,15 @@ using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour, IDamagable, ISpawner
 {
-    public float health;
-    public SpawnPoint _spawnerPoint; 
+    [SerializeField] private float health;
+    private bool _isDead;
+    private SpawnPoint _spawnerPoint;
+
+    protected virtual void SetUnitSettings()
+    {
+        _isDead = false;
+    }
+
     public SpawnPoint SpawnerPoint
     {
         get
@@ -16,9 +23,13 @@ public abstract class UnitBase : MonoBehaviour, IDamagable, ISpawner
     public virtual void Damage(DamageModel model)
     {
         health -= model.damage;
-        if (health <= 0f)
+        if (_isDead == false)
         {
-            Death(model);
+            if (health <= 0f)
+            {
+                _isDead = true;
+                Death(model);
+            }
         }
     }
 
