@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerPerson : MonoBehaviour
+public class UnitsHolder : MonoBehaviour
 {
-    private static ManagerPerson instance;
+    private static UnitsHolder instance;
     public List<UnitBase> _units;
-
     private void Awake()
     {
         instance = this;

@@ -43,12 +43,12 @@ public class Spawner : MonoBehaviour
         var spawnerUnit = Instantiate(unitPerson, spawnPoint.transform.position, Quaternion.identity);
         spawnerUnit.SetSpawnerTransform(spawnPoint);
 
-        ManagerPerson.AddUnit(spawnerUnit);
+        UnitsHolder.AddUnit(spawnerUnit);
     }
 
     public static void KillEnemyUnit(UnitBase unitPerson)
     {
-        ManagerPerson.RemoveUnit(unitPerson);
+        UnitsHolder.RemoveUnit(unitPerson);
 
         SpawnPoint enemySpawnerPoint = unitPerson.SpawnerPoint;
         instance.StartCoroutine(RebirthEnemy(REBIRTH_TIMER, enemySpawnerPoint));
