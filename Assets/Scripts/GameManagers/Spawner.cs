@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private SpawnPoint[] _playerSpawnPoint;
     [SerializeField] private SpawnPoint[] _enemySpawnPoints;
     
-    private const float REBIRTH_TIMER = 5f;
+    private const float rebirthTimer = 5f;
 
     private void Awake()
     {
@@ -51,7 +51,7 @@ public class Spawner : MonoBehaviour
         UnitsHolder.RemoveUnit(unitPerson);
 
         SpawnPoint enemySpawnerPoint = unitPerson.SpawnerPoint;
-        instance.StartCoroutine(RebirthEnemy(REBIRTH_TIMER, enemySpawnerPoint));
+        instance.StartCoroutine(RebirthEnemy(rebirthTimer, enemySpawnerPoint));
         Destroy(unitPerson.gameObject);
     }
 
