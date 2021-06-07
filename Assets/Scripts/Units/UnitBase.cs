@@ -23,9 +23,9 @@ public abstract class UnitBase : MonoBehaviour, IDamagable, ISpawner
     public virtual void Damage(DamageModel model)
     {
         health -= model.damage;
-        if (_isDead == false)
+        if (health <= 0f)
         {
-            if (health <= 0f)
+            if (_isDead == false)
             {
                 _isDead = true;
                 Death(model);
