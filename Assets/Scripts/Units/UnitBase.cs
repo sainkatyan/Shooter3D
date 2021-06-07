@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UnitBase : MonoBehaviour, IDamagable, ISpawner
+public abstract class UnitBase : MonoBehaviour, ISpawner
 {
-    [SerializeField] private float health;
-    private bool _isDead;
     private SpawnPoint _spawnerPoint;
-
-    protected virtual void SetUnitSettings()
-    {
-        _isDead = false;
-    }
 
     public SpawnPoint SpawnerPoint
     {
@@ -20,27 +13,9 @@ public abstract class UnitBase : MonoBehaviour, IDamagable, ISpawner
             return _spawnerPoint;
         }
     }
-    public virtual void Damage(DamageModel model)
-    {
-        health -= model.damage;
-        if (health <= 0f)
-        {
-            if (_isDead == false)
-            {
-                _isDead = true;
-                Death(model);
-            }
-        }
-    }
 
     public void SetSpawnerTransform(SpawnPoint spawnPoint)
     {
         _spawnerPoint = spawnPoint;
-    }
-
-    private void Death(DamageModel damageModel)
-    {
-        Debug.Log("DEATH");
-        Spawner.KillEnemyUnit(this);
     }
 }

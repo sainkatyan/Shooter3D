@@ -87,7 +87,6 @@ public class FireWeapon : BaseWeapon
     {
         _isShooting = false;
         _isRecharging = true;
-        Debug.Log("RECHARGE");
 
         StartCoroutine(StartRecharging());
     }
@@ -114,7 +113,6 @@ public class FireWeapon : BaseWeapon
             Ray ray = new Ray(firePivot.position, bulletTargetDir);
             Shoot(ray);
         }
-
         _fireTimer = _timeFireRate;
     }
 
@@ -126,13 +124,11 @@ public class FireWeapon : BaseWeapon
         {
             CreateVisualBullet(hit.point);
             CheckIUnit(hit);
-            //Debug.DrawLine(firePivot.position, hit.point, Color.red, 1f);
         }
         else
         {
             var targetBulletPos = firePivot.position + ray.direction * distanceOfDamage;
             CreateVisualBullet(targetBulletPos);
-            //Debug.DrawLine(firePivot.position, targetBulletPos, Color.blue, 3f);
         }
     }
     private Vector3 SetBulletTargetDir(Vector3 tempDirAndDistanceOfSphere)
@@ -150,13 +146,13 @@ public class FireWeapon : BaseWeapon
 
     private void CheckIUnit(RaycastHit tempHit)
     {
-        IDamagable damageInterface = null;
-        tempHit.transform.TryGetComponent<IDamagable>(out damageInterface);
+        Health healthComponent = null;
+        tempHit.transform.TryGetComponent<Health>(out healthComponent);
 
-        if (damageInterface != null)
+        if (healthComponent != null)
         {
             DamageModel damageModel = new DamageModel(idAttacker, _idWeapon, _oneBulletDamage);
-            damageInterface.Damage(damageModel);
+            healthComponent.TakeDamage(damageModel);
         }
     }
 }

@@ -57,7 +57,6 @@ public class Spawner : MonoBehaviour
 
     public static IEnumerator RebirthEnemy(float time, SpawnPoint spawnPoint)
     {
-        Debug.Log("REBIRTH ENEMY");
         yield return new WaitForSeconds(time);
         SpawnBaseUnit(instance._enemy, spawnPoint);
     }

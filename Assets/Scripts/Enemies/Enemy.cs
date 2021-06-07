@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class Enemy : UnitBase
 {
-    private void Start()
-    {
-        base.SetUnitSettings();
-    }
+    public Health health;
 }
