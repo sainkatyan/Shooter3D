@@ -5,5 +5,5 @@ using UnityEngine;
 public enum FractionUnit { Neutral, Blue, Red }
 public class Fraction : MonoBehaviour
 {
-    public FractionUnit fractionUnit = FractionUnit.Blue;
+    public FractionUnit fractionUnit = FractionUnit.Neutral;
 }

@@ -107,6 +107,23 @@ public class Health : MonoBehaviour
             }
         }
     }
+    //granade
+    public void TakeDamage(DamageModel model, float damage)
+    {
+        float amount = damage;
+        currentHealth -= amount;
+
+        HealthUpdate?.Invoke(currentHealth, maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            if (_isDead == false)
+            {
+                _isDead = true;
+                Kill(model);
+            }
+        }
+    }
 
     public void Kill(DamageModel damageModel)
     {

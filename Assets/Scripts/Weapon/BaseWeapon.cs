@@ -20,12 +20,6 @@ public abstract class BaseWeapon : MonoBehaviour
         _icon = weaponSetting.Icon;
     }
 
-    public virtual void StartShoot()
-    {
-        _isShooting = true;
-    }
-    public virtual void StopShoot()
-    {
-        _isShooting = false;
-    }
+    public abstract void StartShoot();
+    public abstract void StopShoot();
 }

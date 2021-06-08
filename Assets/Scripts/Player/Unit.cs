@@ -10,9 +10,6 @@ public class Unit : UnitBase
     public WeaponController shooting;
     public CameraMovement cameraMovement;
 
-    public Health health;
-    public Fraction unitFraction;
-
     private void Awake()
     {
         inputController = gameObject.AddComponent<InputController>();
@@ -20,7 +17,5 @@ public class Unit : UnitBase
 
         unitMovement.Init(inputController, cameraMovement);
         cameraMovement.Init(inputController, unitMovement);
-
-        health = GetComponent<Health>();
     }
 }

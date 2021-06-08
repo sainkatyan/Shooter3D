@@ -32,7 +32,6 @@ public class FireWeapon : BaseWeapon
     protected override void SetSettings(WeaponSettings weaponSettings)
     {
         base.SetSettings(weaponSettings);
-
         _countOfShoot = weaponSettings.CountOfShoot;
         _shootType = weaponSettings.ShootType;
         _bulletsInMagazine = weaponSettings.BulletsInMagazine;
@@ -61,7 +60,7 @@ public class FireWeapon : BaseWeapon
         if (_fireTimer <= 0f)
         {
             CheckBulletsInMagazine();
-            switch (_weaponSetting.ShootType)
+            switch (_shootType)
             {
                 case ShootType.Automate:
                     AutomateShot();
@@ -154,5 +153,15 @@ public class FireWeapon : BaseWeapon
             DamageModel damageModel = new DamageModel(idAttacker, _idWeapon, _oneBulletDamage);
             healthComponent.TakeDamage(damageModel);
         }
+    }
+
+    public override void StartShoot()
+    {
+        _isShooting = true;
+    }
+
+    public override void StopShoot()
+    {
+        _isShooting = false;
     }
 }
