@@ -82,7 +82,10 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        indicator.transform.LookAt(_mainCameraTrans);
+        if (_mainCameraTrans != null)
+        {
+            indicator.transform.LookAt(_mainCameraTrans);
+        }
     }
 
     public void Heal(float amount)

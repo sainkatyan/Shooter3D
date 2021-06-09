@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] private BaseWeapon _equippedWeaponPrefub = null;
+    [SerializeField] public BaseWeapon _equippedWeaponPrefub = null;
     [SerializeField] private Transform _weaponPivot;
 
     private int idWeaponSlot = 0;

@@ -18,4 +18,8 @@ public class Unit : UnitBase
         unitMovement.Init(inputController, cameraMovement);
         cameraMovement.Init(inputController, unitMovement);
     }
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
 }

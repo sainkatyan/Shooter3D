@@ -24,9 +24,6 @@ public class LocalizationManager : MonoBehaviour
     {
         if (LocalizationUpdateEvent == null)
             LocalizationUpdateEvent = new UnityEvent();
-
-        inputController = gameObject.AddComponent<InputController>();
-        inputController.InitializeUIController(this);
     }
 
     private IEnumerator Start()
@@ -82,7 +79,6 @@ public class LocalizationManager : MonoBehaviour
             {
                 localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);
             }
-
             //Debug.Log("Data loaded, dictionary contains: " + localizedText.Count + " entries");
         }
         else

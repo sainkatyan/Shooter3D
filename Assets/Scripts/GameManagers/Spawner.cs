@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    private static Spawner instance;
+    public static Spawner instance;
 
     [SerializeField] private UnitBase _player;
     [SerializeField] private UnitBase _enemy;
@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
         SpawnEnemies();
     }
 
-    private void SpawnPlayer()
+    public void SpawnPlayer()
     {
         SpawnBaseUnit(_player, _playerSpawnPoint[Random.Range(0, _playerSpawnPoint.Length - 1)], FractionUnit.Blue);
     }
@@ -50,8 +50,19 @@ public class Spawner : MonoBehaviour
     public static void KillEnemyUnit(UnitBase unitPerson, DamageModel damageModel)
     {
         UnitsHolder.RemoveUnit(unitPerson);
-        SpawnPoint enemySpawnerPoint = unitPerson.SpawnerPoint;
-        instance.StartCoroutine(RebirthEnemy(rebirthTimer, enemySpawnerPoint));
+        SpawnPoint spawnerPoint = unitPerson.SpawnerPoint;
+
+        switch (unitPerson.fraction)
+        {
+            case FractionUnit.Neutral:
+                break;
+            case FractionUnit.Blue:
+                EnableUISettings();
+                break;
+            case FractionUnit.Red:
+                instance.StartCoroutine(RebirthEnemy(rebirthTimer, spawnerPoint));
+                break;
+        }
         Destroy(unitPerson.gameObject);
     }
 
@@ -59,5 +70,11 @@ public class Spawner : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         SpawnBaseUnit(instance._enemy, spawnPoint, FractionUnit.Red);
+    }
+
+    public static void EnableUISettings()
+    {
+        Cursor.visible = true;
+        UIController.instance.EnableSettings();
     }
 }

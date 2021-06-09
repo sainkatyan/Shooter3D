@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FireWeapon : BaseWeapon
 {
-    [SerializeField] private WeaponSettings _weaponSetting;
+    [SerializeField] public WeaponSettings _weaponSetting;
     private float distanceOfDamage = 40f;
-    [SerializeField] private Transform firePivot;
+    public Transform firePivot;
   
     //extra set settings
     private int _countOfShoot; 
@@ -96,7 +96,7 @@ public class FireWeapon : BaseWeapon
         _isRecharging = false;
     }
     #endregion
-    private void AutomateShot()
+    public void AutomateShot()
     {
         Ray ray = new Ray(firePivot.position, firePivot.forward);
         Shoot(ray);

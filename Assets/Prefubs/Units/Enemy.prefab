@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2124199354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124199355}
+  m_Layer: 0
+  m_Name: WeaponPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2124199355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124199354}
+  m_LocalRotation: {x: 0, y: -0.04518854, z: 0, w: 0.9989785}
+  m_LocalPosition: {x: 0.624, y: 0.2460001, z: 0.472}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7702605264774158854}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -5.18, z: 0}
 --- !u!1 &1558236089182813914
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +432,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6296838042023851860}
+  - {fileID: 2124199355}
   m_Father: {fileID: 5720515192617199712}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -465,6 +496,8 @@ GameObject:
   - component: {fileID: 7852634131978821101}
   - component: {fileID: 6770999400208016521}
   - component: {fileID: 2451064021620256219}
+  - component: {fileID: 6018255760113628440}
+  - component: {fileID: 5060756644040483516}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -499,7 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7490c1e3e3c3b594bab7cdf7e9016f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 0}
+  weaponController: {fileID: 5060756644040483516}
 --- !u!136 &7852634131978821101
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -543,6 +576,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthSlider: {fileID: 1068837052143247511}
+--- !u!136 &6018255760113628440
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720515192617199724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5060756644040483516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720515192617199724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317eddf7330f6ff41b81d78e6719cf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _equippedWeaponPrefub: {fileID: -3699741143447791288, guid: 8fa680280db4f1247945355f56e21b5f,
+    type: 3}
+  _weaponPivot: {fileID: 2124199355}
+  weaponSlotes:
+  - {fileID: -3699741143447791288, guid: 8fa680280db4f1247945355f56e21b5f, type: 3}
 --- !u!1 &8332104346833315145
 GameObject:
   m_ObjectHideFlags: 0

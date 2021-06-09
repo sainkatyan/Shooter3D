@@ -21,7 +21,10 @@ public class Bullet : MonoBehaviour
     {
         _lifeTime += Time.deltaTime / _speed;
         transform.position = Vector3.Lerp(_startPos, _endPos, _lifeTime);
-        transform.LookAt(Camera.main.transform.position, Vector3.up);
+        if (Camera.main != null)
+        {
+            transform.LookAt(Camera.main.transform.position, Vector3.up);
+        }
         if (_lifeTime > 1f)
         {
             DestroyBullet();
