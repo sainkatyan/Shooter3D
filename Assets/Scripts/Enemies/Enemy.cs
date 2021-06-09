@@ -36,5 +36,9 @@ public class Enemy : UnitBase
         {
             transform.LookAt(unitTarget.transform);
         }
+        else
+        {
+            weaponController.StopShoot();
+        }
     }
 }
