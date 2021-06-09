@@ -9,9 +9,6 @@ public class UnitsHolder : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
-    private void Start()
-    {
         _units = new List<UnitBase>();
     }
     public static void AddUnit(UnitBase unit)
