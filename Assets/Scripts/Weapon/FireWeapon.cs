@@ -7,9 +7,9 @@ public class FireWeapon : BaseWeapon
     [SerializeField] public WeaponSettings _weaponSetting;
     private float distanceOfDamage = 40f;
     public Transform firePivot;
-  
+
     //extra set settings
-    private int _countOfShoot; 
+    private int _countOfShoot;
     private ShootType _shootType;
     private int _bulletsInMagazine;
 
@@ -69,7 +69,7 @@ public class FireWeapon : BaseWeapon
                     ManualShot();
                     break;
             }
-        } 
+        }
     }
 
     #region Charging
@@ -84,7 +84,6 @@ public class FireWeapon : BaseWeapon
     }
     private void Reсharge()
     {
-        _isShooting = false;
         _isRecharging = true;
 
         StartCoroutine(StartRecharging());
