@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DamageModel
 {
-    public int idAttacker;
+    public string idAttacker;
     public int idWeapon;
     public float damage;
 
-    public DamageModel(int _idAttacker, int _idWeapon, float _damage)
+    public DamageModel(string _idAttacker, int _idWeapon, float _damage)
     {
         idAttacker = _idAttacker;
         idWeapon = _idWeapon;

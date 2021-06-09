@@ -67,8 +67,9 @@ public class GranadeBullet : MonoBehaviour
 
             if (IsShooting(ray, collider))
             {
-                //Debug.Log("DAMAGE " + damage + " DISTANCE " + distance);
+                Debug.Log("DAMAGE " + damage + " DISTANCE " + distance);
                 healthComponent.TakeDamage(_damageModel, damage);
+                Debug.Log("damage " + damage);
             }
         }
     }

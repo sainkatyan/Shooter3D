@@ -43,6 +43,7 @@ public class Spawner : MonoBehaviour
         var spawnerUnit = Instantiate(unitPerson, spawnPoint.transform.position, Quaternion.identity);
         spawnerUnit.SetSpawnerTransform(spawnPoint);
         spawnerUnit.SetFraction(fraction);
+        spawnerUnit.UnitBaseName = fraction.ToString() + Random.Range(0, 30);
 
         UnitsHolder.AddUnit(spawnerUnit);
     }

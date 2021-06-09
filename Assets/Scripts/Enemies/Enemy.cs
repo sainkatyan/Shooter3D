@@ -5,7 +5,14 @@ using UnityEngine;
 public class Enemy : UnitBase
 {
     [SerializeField]private WeaponController weaponController;
-    private Collider unitTarget;
+    public Collider unitTargetCollider;
+    //public UnitBase unitTarget;
+
+    private void Start()
+    {
+        IsDead = false;
+        weaponController.GetInfoFromBaseUnit(base.UnitBaseName);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,7 +22,8 @@ public class Enemy : UnitBase
         {
             if (unit.fraction != this.fraction)
             {
-                unitTarget = other;
+                unitTargetCollider = other;
+                //unitTarget = GetComponent<UnitBase>();
                 weaponController.StartShoot();
             }
         }
@@ -23,18 +31,23 @@ public class Enemy : UnitBase
 
     private void OnTriggerExit(Collider other)
     {
-        if (other == unitTarget)
+        StopShooting(other);
+    }
+
+    private void StopShooting(Collider other)
+    {
+        if (other == unitTargetCollider)
         {
-            unitTarget = null;
+            unitTargetCollider = null;
             weaponController.StopShoot();
         }
     }
 
     private void Update()
     {
-        if (unitTarget != null)
+        if (unitTargetCollider != null)
         {
-            transform.LookAt(unitTarget.transform);
+            transform.LookAt(unitTargetCollider.transform);
         }
         else
         {

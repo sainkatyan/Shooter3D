@@ -11,6 +11,8 @@ public class WeaponController : MonoBehaviour
     public List<BaseWeapon> weaponSlotes;
     public BaseWeapon EquippedWeapon { get; private set; }
 
+    private string baseUnitName;
+
     private void Awake()
     {
         _equippedWeaponPrefub = weaponSlotes[idWeaponSlot];
@@ -26,6 +28,13 @@ public class WeaponController : MonoBehaviour
         EquippedWeapon = Instantiate(newWeapon, _weaponPivot.position, _weaponPivot.rotation);
         EquippedWeapon.transform.SetParent(_weaponPivot);
         _equippedWeaponPrefub = EquippedWeapon;
+
+        EquippedWeapon.GetInfoBaseUnit(baseUnitName);
+    }
+
+    public void GetInfoFromBaseUnit(string name)
+    {
+        baseUnitName = name; //работает
     }
 
     public void StartShoot()
@@ -44,5 +53,6 @@ public class WeaponController : MonoBehaviour
             idWeaponSlot = 0;
         }
         EquipWeapon(weaponSlotes[idWeaponSlot]);
+        GetInfoFromBaseUnit(baseUnitName);
     }
 }

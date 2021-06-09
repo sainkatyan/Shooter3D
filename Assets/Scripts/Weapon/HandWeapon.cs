@@ -7,7 +7,7 @@ public class HandWeapon : BaseWeapon
     [SerializeField] private WeaponSettings _weaponSettings;
     [SerializeField] private Transform firePivot;
 
-    private int _idAttacker;
+    private string _idNameAttacker;
 
     private LineRenderer _lineRenderer;
     private bool _isAiming = false;
@@ -119,7 +119,7 @@ public class HandWeapon : BaseWeapon
         _addForceThrowingTimer = 1f;
 
         _granadeBullet = Instantiate(_granadePrefub);
-        DamageModel damageModel = new DamageModel(_idAttacker, _idWeapon, _damage);
+        DamageModel damageModel = new DamageModel(_idNameAttacker, _idWeapon, _damage);
         _granadeBullet.SetDamageModel = damageModel;
     }
     public override void StopShoot()
@@ -132,5 +132,10 @@ public class HandWeapon : BaseWeapon
             _granadeBullet.Shoot(targetPositions);
             _granadeBullet = null;
         }
+    }
+
+    public override void GetInfoBaseUnit(string name)
+    {
+        _idNameAttacker = name;
     }
 }

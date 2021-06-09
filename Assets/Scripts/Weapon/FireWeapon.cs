@@ -20,7 +20,7 @@ public class FireWeapon : BaseWeapon
     private float _zoneOfDamage = 10f;
     private int _currentBulletsInMagazine;
     private float _oneBulletDamage;
-    private int idAttacker = 0;
+    private string _idNameAttacker;
 
     [SerializeField] private Bullet _bullet;
 
@@ -29,6 +29,7 @@ public class FireWeapon : BaseWeapon
         SetSettings(_weaponSetting);
         GetStartSettings();
     }
+
     protected override void SetSettings(WeaponSettings weaponSettings)
     {
         base.SetSettings(weaponSettings);
@@ -149,8 +150,9 @@ public class FireWeapon : BaseWeapon
 
         if (healthComponent != null)
         {
-            DamageModel damageModel = new DamageModel(idAttacker, _idWeapon, _oneBulletDamage);
+            DamageModel damageModel = new DamageModel(_idNameAttacker, _idWeapon, _oneBulletDamage);
             healthComponent.TakeDamage(damageModel);
+      
         }
     }
 
@@ -162,5 +164,10 @@ public class FireWeapon : BaseWeapon
     public override void StopShoot()
     {
         _isShooting = false;
+    }
+
+    public override void GetInfoBaseUnit(string name)
+    {
+        _idNameAttacker = name;
     }
 }

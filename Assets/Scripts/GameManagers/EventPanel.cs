@@ -17,8 +17,10 @@ public class EventPanel : MonoBehaviour
     {
         killer.text = tempKiller;
         imageWeapon.sprite = sprites[spriteID];
-        killer.text = tempVictim;
+        victim.text = tempVictim;
+
         StartCoroutine(EnableInfo());
+
     }
 
     private IEnumerator EnableInfo()

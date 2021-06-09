@@ -20,6 +20,8 @@ public class Unit : UnitBase
     }
     private void Start()
     {
-        Cursor.visible = true;
+        Cursor.visible = false;
+        IsDead = false;
+        shooting.GetInfoFromBaseUnit(base.UnitBaseName);
     }
 }

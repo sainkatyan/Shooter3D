@@ -22,4 +22,6 @@ public abstract class BaseWeapon : MonoBehaviour
 
     public abstract void StartShoot();
     public abstract void StopShoot();
+
+    public abstract void GetInfoBaseUnit(string name);
 }
