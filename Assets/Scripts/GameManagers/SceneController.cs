@@ -9,7 +9,7 @@ public class SceneController : MonoBehaviour
     {
         if (LocalizationManager.IsReady)
         {
-            SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene("Game", LoadSceneMode.Single);
         }
     }
 }
