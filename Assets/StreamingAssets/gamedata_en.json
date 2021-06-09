@@ -1,0 +1,28 @@
+{
+	"items": [
+		{
+			"key": "menu_play",
+			"value": "Play"
+		},
+		{
+			"key": "weapon",
+			"value": "Automate"
+		},
+		{
+			"key": "game_mode_capture_point",
+			"value": "Capture Point"
+		},
+		{
+			"key": "language_text",
+			"value": "Language"
+		},
+		{
+			"key": "language_rus",
+			"value": "Russian"
+		},
+		{
+			"key": "language_en",
+			"value": "English"
+		}
+	]
+}

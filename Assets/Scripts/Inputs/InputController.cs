@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class InputController : MonoBehaviour
 {
     [HideInInspector] public Unit unit;
+    [HideInInspector] public LocalizationManager uiController;
     public void InitializeController(Unit baseController)
     {
         unit = baseController;
@@ -16,10 +17,18 @@ public class InputController : MonoBehaviour
 
         InputEvents.Event_StartChangingWeapon.AddListener(ChangeWeapon);
 
+        InputEvents.Event_Escape.AddListener(Escape);
+
         //need to be visible = true in menu
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    public void InitializeUIController(LocalizationManager baseUIController)
+    {
+        baseUIController = uiController;
+    }
+
     public virtual Vector2 MoveInput()
     {
         return InputEvents.GetMoveInput();
@@ -39,5 +48,9 @@ public class InputController : MonoBehaviour
     public virtual void ChangeWeapon()
     {
         unit.shooting.ChangeSlot();
+    }
+    public virtual void Escape()
+    {
+        //menu
     }
 }

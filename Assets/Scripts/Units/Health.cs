@@ -127,7 +127,9 @@ public class Health : MonoBehaviour
 
     public void Kill(DamageModel damageModel)
     {
-        Spawner.KillEnemyUnit(_unitBase);
+        Spawner.KillEnemyUnit(_unitBase, damageModel);
+        EventFeed.instance.CreatePanel(damageModel.idAttacker.ToString(), damageModel.idWeapon, _unitBase.name);
+        Debug.Log("MODEL: " + damageModel.idAttacker + " " + damageModel.idWeapon);
         //Создать ленту событий
     }
 }

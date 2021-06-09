@@ -899,8 +899,6 @@ MonoBehaviour:
   unitMovement: {fileID: 4739347244568802125}
   shooting: {fileID: 4739347244568802124}
   cameraMovement: {fileID: 4739347243632005446}
-  health: {fileID: 0}
-  unitFraction: {fileID: 0}
 --- !u!114 &4739347244568802125
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -47,10 +47,9 @@ public class Spawner : MonoBehaviour
         UnitsHolder.AddUnit(spawnerUnit);
     }
 
-    public static void KillEnemyUnit(UnitBase unitPerson)
+    public static void KillEnemyUnit(UnitBase unitPerson, DamageModel damageModel)
     {
         UnitsHolder.RemoveUnit(unitPerson);
-
         SpawnPoint enemySpawnerPoint = unitPerson.SpawnerPoint;
         instance.StartCoroutine(RebirthEnemy(rebirthTimer, enemySpawnerPoint));
         Destroy(unitPerson.gameObject);

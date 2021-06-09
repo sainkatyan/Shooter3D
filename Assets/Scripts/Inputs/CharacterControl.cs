@@ -185,6 +185,44 @@ public class @CharacterControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Global"",
+            ""id"": ""3a9257a7-d9d1-4a45-a51e-5b1b1db31afc"",
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6717cbe-29dc-4c9b-9a5b-722d611831b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""76af8f0f-4104-42c5-b160-4dd94f1414fa"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5859cc9-1eba-4825-99a3-50fb5beb6928"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -195,6 +233,9 @@ public class @CharacterControl : IInputActionCollection, IDisposable
         m_Character_Rotate = m_Character.FindAction("Rotate", throwIfNotFound: true);
         m_Character_Shoot = m_Character.FindAction("Shoot", throwIfNotFound: true);
         m_Character_ChangeWeapon = m_Character.FindAction("ChangeWeapon", throwIfNotFound: true);
+        // Global
+        m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
+        m_Global_Escape = m_Global.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -297,11 +338,48 @@ public class @CharacterControl : IInputActionCollection, IDisposable
         }
     }
     public CharacterActions @Character => new CharacterActions(this);
+
+    // Global
+    private readonly InputActionMap m_Global;
+    private IGlobalActions m_GlobalActionsCallbackInterface;
+    private readonly InputAction m_Global_Escape;
+    public struct GlobalActions
+    {
+        private @CharacterControl m_Wrapper;
+        public GlobalActions(@CharacterControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_Global_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_Global; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GlobalActions set) { return set.Get(); }
+        public void SetCallbacks(IGlobalActions instance)
+        {
+            if (m_Wrapper.m_GlobalActionsCallbackInterface != null)
+            {
+                @Escape.started -= m_Wrapper.m_GlobalActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_GlobalActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_GlobalActionsCallbackInterface.OnEscape;
+            }
+            m_Wrapper.m_GlobalActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
+            }
+        }
+    }
+    public GlobalActions @Global => new GlobalActions(this);
     public interface ICharacterActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
+    }
+    public interface IGlobalActions
+    {
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

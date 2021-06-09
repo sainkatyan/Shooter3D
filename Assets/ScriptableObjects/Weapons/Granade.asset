@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 2
   _timeFireRate: 2
-  _timeRecharge: 1
-  _attackDamage: 30
+  _timeRecharge: 3
+  _attackDamage: 50
   _icon: {fileID: 21300000, guid: 1956dca25eed5d044a477ff80e514516, type: 3}
   _countOfShoot: 1
   _shootType: 1

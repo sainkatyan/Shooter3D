@@ -14,6 +14,8 @@ public class InputEvents : MonoBehaviour
 
     public static UnityEvent Event_StartChangingWeapon;
 
+    public static UnityEvent Event_Escape;
+
     private void Awake()
     {
         InitializeEvents();
@@ -32,6 +34,8 @@ public class InputEvents : MonoBehaviour
         Event_StopShoot = new UnityEvent();
 
         Event_StartChangingWeapon = new UnityEvent();
+
+        Event_Escape = new UnityEvent();
     }
 
     private void DestroyEvents()
@@ -40,6 +44,7 @@ public class InputEvents : MonoBehaviour
         Event_StopShoot.RemoveAllListeners();
 
         Event_StartChangingWeapon.RemoveAllListeners();
+        Event_Escape.RemoveAllListeners();
     }
 
     protected virtual void InitializeController()
@@ -51,6 +56,7 @@ public class InputEvents : MonoBehaviour
         InputActions.Character.Shoot.canceled += StopShoot;
 
         InputActions.Character.ChangeWeapon.started += StartChangingWeapon;
+        InputActions.Global.Escape.started += Escape;
     }
 
     //for menu
@@ -85,5 +91,9 @@ public class InputEvents : MonoBehaviour
     public static void StartChangingWeapon(InputAction.CallbackContext context)
     {
         Event_StartChangingWeapon?.Invoke();
+    }
+    public static void Escape(InputAction.CallbackContext context)
+    {
+        Event_Escape?.Invoke();
     }
 }
