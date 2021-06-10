@@ -16,7 +16,6 @@ public class Health : MonoBehaviour
 
     private UnitBase _unitBase;
     private Transform _mainCameraTrans;
-    private bool _isDead = false;
 
     private float _currentHealth;
     [SerializeField] private float _startHealth = 100;
@@ -60,7 +59,6 @@ public class Health : MonoBehaviour
             _mainCameraTrans = Camera.main.transform;
         }
         currentHealth = _startHealth;
-        _isDead = false;
     }
 
     private void SetProgressBarColor(UnitBase unitBase)
@@ -109,9 +107,9 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            if (_isDead == false)
+            if (_unitBase.IsDead == false)
             {
-                _isDead = true;
+                _unitBase.IsDead = true;
                 Kill(model);
             }
         }
@@ -126,9 +124,9 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            if (_isDead == false)
+            if (_unitBase.IsDead == false)
             {
-                _isDead = true;
+                _unitBase.IsDead = true;
                 Kill(model);
             }
         }
@@ -137,11 +135,6 @@ public class Health : MonoBehaviour
     public void Kill(DamageModel damageModel)
     {
         Spawner.KillEnemyUnit(_unitBase, damageModel);
-
-        if (_unitBase.fraction == FractionUnit.Blue)
-        {
-            _unitBase.IsDead = true;
-        }
 
         EventFeed.instance.CreatePanel(damageModel.idAttacker, damageModel.idWeapon, _unitBase.UnitBaseName);
     }

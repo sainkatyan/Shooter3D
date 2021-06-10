@@ -925,13 +925,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317eddf7330f6ff41b81d78e6719cf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _equippedWeaponPrefub: {fileID: 2972093825615056855, guid: 8c6e86df95d7f1e47898399d59b1a3df,
-    type: 3}
   _weaponPivot: {fileID: 4739347242988838785}
   weaponSlotes:
-  - {fileID: 1199375722966467939, guid: ba8c4b5323fa2064f9d4e5fd835d6f20, type: 3}
   - {fileID: 2972093825615056855, guid: 8c6e86df95d7f1e47898399d59b1a3df, type: 3}
   - {fileID: 8919792180185569083, guid: 9b4589c7b929f11499da4297a6a73fa8, type: 3}
+  - {fileID: 1199375722966467939, guid: ba8c4b5323fa2064f9d4e5fd835d6f20, type: 3}
 --- !u!114 &1176787997877229010
 MonoBehaviour:
   m_ObjectHideFlags: 0
