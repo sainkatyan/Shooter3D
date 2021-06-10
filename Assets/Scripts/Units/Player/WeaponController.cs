@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] public BaseWeapon _equippedWeaponPrefub = null;
     [SerializeField] private Transform _weaponPivot;
+    private UnitBase _parentUnit;
 
     private int idWeaponSlot = 0;
     public List<BaseWeapon> weaponSlotes;
     public BaseWeapon EquippedWeapon { get; private set; }
 
-    private string baseUnitName;
-
     private void Awake()
     {
-        _equippedWeaponPrefub = weaponSlotes[idWeaponSlot];
-        EquipWeapon(_equippedWeaponPrefub);
+        EquipWeapon(weaponSlotes[0]);
     }
+
+    public void Init(UnitBase unitBase)
+    {
+        _parentUnit = unitBase;
+    }
+
     private void EquipWeapon(BaseWeapon newWeapon)
     {
         if (EquippedWeapon != null)
@@ -27,14 +30,7 @@ public class WeaponController : MonoBehaviour
 
         EquippedWeapon = Instantiate(newWeapon, _weaponPivot.position, _weaponPivot.rotation);
         EquippedWeapon.transform.SetParent(_weaponPivot);
-        _equippedWeaponPrefub = EquippedWeapon;
-
-        EquippedWeapon.GetInfoBaseUnit(baseUnitName);
-    }
-
-    public void GetInfoFromBaseUnit(string name)
-    {
-        baseUnitName = name; //работает
+        EquippedWeapon.SetInfoBaseUnit(_parentUnit);
     }
 
     public void StartShoot()
@@ -53,6 +49,5 @@ public class WeaponController : MonoBehaviour
             idWeaponSlot = 0;
         }
         EquipWeapon(weaponSlotes[idWeaponSlot]);
-        GetInfoFromBaseUnit(baseUnitName);
     }
 }

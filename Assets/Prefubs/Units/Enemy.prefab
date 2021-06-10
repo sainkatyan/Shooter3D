@@ -533,6 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponController: {fileID: 5060756644040483516}
+  unitTargetCollider: {fileID: 0}
 --- !u!136 &7852634131978821101
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -602,11 +603,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317eddf7330f6ff41b81d78e6719cf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _equippedWeaponPrefub: {fileID: -3699741143447791288, guid: 8fa680280db4f1247945355f56e21b5f,
+  _equippedWeaponPrefub: {fileID: 2157219979908138047, guid: 8fa680280db4f1247945355f56e21b5f,
     type: 3}
   _weaponPivot: {fileID: 2124199355}
   weaponSlotes:
-  - {fileID: -3699741143447791288, guid: 8fa680280db4f1247945355f56e21b5f, type: 3}
+  - {fileID: 2157219979908138047, guid: 8fa680280db4f1247945355f56e21b5f, type: 3}
 --- !u!1 &8332104346833315145
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,8 +56,10 @@ public class Health : MonoBehaviour
         _unitBase = GetComponent<UnitBase>();
         SetProgressBarColor(_unitBase);
 
-        _mainCameraTrans = Camera.main.transform;
-
+        if (_mainCameraTrans != null)
+        {
+            _mainCameraTrans = Camera.main.transform;
+        }
         currentHealth = _startHealth;
         _isDead = false;
     }
@@ -134,7 +136,6 @@ public class Health : MonoBehaviour
 
         if (_unitBase.fraction == FractionUnit.Blue)
         {
-            Debug.Log("PLAYER DEAD");
             _unitBase.IsDead = true;
         }
 

@@ -9,16 +9,9 @@ public class GranadeBullet : MonoBehaviour
     private float _radius = 5f;
 
     private DamageModel _damageModel;
-    public DamageModel SetDamageModel
+    public void Shoot(List<Vector3> tempPositions, DamageModel damageModel)
     {
-        set
-        {
-            _damageModel = value;
-        }
-    }
-
-    public void Shoot(List<Vector3> tempPositions)
-    {
+        this._damageModel = damageModel;
         this._positions = tempPositions;
         StartCoroutine(MoveGranade());
     }
@@ -60,21 +53,19 @@ public class GranadeBullet : MonoBehaviour
         if (healthComponent != null)
         {
             float distance = Vector3.Distance(transform.position, collider.transform.position);
-            float damage = SetDamage(distance);
+            float damage = GetDamage(distance);
 
             var rayDirection = (collider.bounds.center - transform.position).normalized;
             Ray ray = new Ray(transform.position, rayDirection);
 
             if (IsShooting(ray, collider))
             {
-                Debug.Log("DAMAGE " + damage + " DISTANCE " + distance);
                 healthComponent.TakeDamage(_damageModel, damage);
-                Debug.Log("damage " + damage);
             }
         }
     }
 
-    private float SetDamage(float tempDistance)
+    private float GetDamage(float tempDistance)
     {
         var damage = _damageModel.damage - _damageModel.damage / _radius * tempDistance;
         if (damage <= 0f)

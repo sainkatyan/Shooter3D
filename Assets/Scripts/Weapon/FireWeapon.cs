@@ -20,7 +20,7 @@ public class FireWeapon : BaseWeapon
     private float _zoneOfDamage = 10f;
     private int _currentBulletsInMagazine;
     private float _oneBulletDamage;
-    private string _idNameAttacker;
+
 
     [SerializeField] private Bullet _bullet;
 
@@ -118,7 +118,7 @@ public class FireWeapon : BaseWeapon
     private void Shoot(Ray ray)
     {
         RaycastHit hit;
-        var hitchek = Physics.Raycast(ray, out hit, distanceOfDamage, ~ignoreLayer);
+        var hitchek = Physics.Raycast(ray, out hit, distanceOfDamage, ~ignoreLayer, QueryTriggerInteraction.Ignore);
         if (hitchek)
         {
             CreateVisualBullet(hit.point);
@@ -150,9 +150,8 @@ public class FireWeapon : BaseWeapon
 
         if (healthComponent != null)
         {
-            DamageModel damageModel = new DamageModel(_idNameAttacker, _idWeapon, _oneBulletDamage);
+            DamageModel damageModel = new DamageModel(_parentUnit.UnitBaseName, _idWeapon, _oneBulletDamage);
             healthComponent.TakeDamage(damageModel);
-      
         }
     }
 
@@ -164,10 +163,5 @@ public class FireWeapon : BaseWeapon
     public override void StopShoot()
     {
         _isShooting = false;
-    }
-
-    public override void GetInfoBaseUnit(string name)
-    {
-        _idNameAttacker = name;
     }
 }

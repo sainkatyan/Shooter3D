@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6507600061598556035}
   - component: {fileID: 3234300151036482132}
   - component: {fileID: 5256630887842450219}
-  - component: {fileID: -3699741143447791288}
+  - component: {fileID: 2157219979908138047}
   m_Layer: 0
   m_Name: AutomatEnemy
   m_TagString: Untagged
@@ -95,7 +95,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3699741143447791288
+--- !u!114 &2157219979908138047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,11 +104,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 905042554685584881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3bd94fbc2c90304a83d017dee127f3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b71a534e107fed48be1898e86a819ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponSetting: {fileID: 11400000, guid: a3078cc5b090103449a56119169c1680, type: 2}
-  firePivot: {fileID: 3804543041552640312}
+  firePivot: {fileID: 8792663679874826278}
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 4

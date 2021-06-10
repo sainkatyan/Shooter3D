@@ -8,10 +8,13 @@ public class Enemy : UnitBase
     public Collider unitTargetCollider;
     //public UnitBase unitTarget;
 
+    private void Awake()
+    {
+        weaponController.Init(this);
+    }
     private void Start()
     {
         IsDead = false;
-        weaponController.GetInfoFromBaseUnit(base.UnitBaseName);
     }
 
     private void OnTriggerEnter(Collider other)

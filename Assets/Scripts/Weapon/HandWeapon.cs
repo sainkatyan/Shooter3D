@@ -7,17 +7,16 @@ public class HandWeapon : BaseWeapon
     [SerializeField] private WeaponSettings _weaponSettings;
     [SerializeField] private Transform firePivot;
 
-    private string _idNameAttacker;
-
     private LineRenderer _lineRenderer;
     private bool _isAiming = false;
 
-    private float _startAngle = 45f;
+    private float _startAngle = 25f;
     private int _lineRendererSegments = 30;
 
-    private float _minAmplituda = 0.1f;
-    private float _multiplyForce = 0.1f;
-    private float _addForceThrowingTimer = 1f;
+    private float _maxDistance = 5f;
+    private float _minDistance = 0.1f;
+
+    private float _addForceThrowingTimer = 0f;
     private float _speedAddForceThrowingTimer = 0.85f;
     private bool _hitCollider = false;
     private float _fireTimer = 0f;
@@ -26,6 +25,7 @@ public class HandWeapon : BaseWeapon
     private GranadeBullet _granadeBullet;
 
     public List<Vector3> targetPositions = new List<Vector3>();
+    public LayerMask ignoreLayer;
 
     private void Start()
     {
@@ -40,7 +40,6 @@ public class HandWeapon : BaseWeapon
         two = new Vector3(0f, Mathf.Cos(_startAngle), 0f);
         Vector3 sum = (one + two).normalized;
       
-        _addForceThrowingTimer = 1f;
         _fireTimer = _weaponSettings.TimeRecharge;
     }
     protected override void SetSettings(WeaponSettings weaponSettings)
@@ -53,37 +52,37 @@ public class HandWeapon : BaseWeapon
         _fireTimer += Time.deltaTime;
         if (_isAiming)
         {
-            _addForceThrowingTimer -= Time.deltaTime * _speedAddForceThrowingTimer;
-            if (_addForceThrowingTimer <= 0f)
+            _addForceThrowingTimer += Time.deltaTime * _speedAddForceThrowingTimer;
+            if (_addForceThrowingTimer >= 1f)
             {
-                _addForceThrowingTimer = 0f;
+                _addForceThrowingTimer = 1f;
             }
 
-            Vector3 one;
-            one = firePivot.forward;
+            Vector3 originDir;
+            originDir = firePivot.forward;
 
-            Vector3 two;
-            two = new Vector3(0f, Mathf.Cos(_startAngle), 0f);
+            Vector3 dirModificator;
+            dirModificator = new Vector3(0f, Mathf.Cos(_startAngle), 0f);
 
-            Vector3 sum = (one + two).normalized;
+            Vector3 sumDir = (originDir + dirModificator).normalized;
 
             _lineRenderer.positionCount = _lineRendererSegments;
             Vector3 nextPos = firePivot.position;
 
-            float sin = (Mathf.Sin(_addForceThrowingTimer) + 1f) * 0.5f; 
-            sin *= _multiplyForce + _minAmplituda;
+            float verticalBalysticDelta = GetBalysticDelta();
 
             targetPositions.Clear();
+
             for (int i = 0; i < _lineRendererSegments; i++)
             {
                 Vector3 prevPos = nextPos;
                 _lineRenderer.SetPosition(i, nextPos);
                 targetPositions.Add(nextPos);
 
-                two = two + new Vector3(0f, -sin, 0f); 
-                sum = (one + two).normalized;
+                dirModificator += new Vector3(0f, -verticalBalysticDelta, 0f); 
+                sumDir = (originDir + dirModificator).normalized;
 
-                nextPos += sum;
+                nextPos += sumDir;
                 Shoot(prevPos, nextPos);
 
                 if (_hitCollider)
@@ -95,10 +94,17 @@ public class HandWeapon : BaseWeapon
         }
     }
 
+    private float GetBalysticDelta()
+    {
+        float verticalBalysticDelta = 1f / (_addForceThrowingTimer * _maxDistance + _minDistance);
+        return verticalBalysticDelta;
+    }
+
     private void Shoot(Vector3 startPos, Vector3 endPos)
     {
         RaycastHit hit;
-        _hitCollider = Physics.Raycast(startPos, endPos - startPos, out hit, Vector3.Distance(endPos, startPos));
+        _hitCollider = Physics.Raycast(startPos, endPos - startPos, out hit, Vector3.Distance(endPos, startPos), ~ignoreLayer, QueryTriggerInteraction.Ignore);
+
         if (_hitCollider == true)
         {
             _granadeBullet.transform.position = hit.point;
@@ -116,11 +122,10 @@ public class HandWeapon : BaseWeapon
 
         _isAiming = true;
         _lineRenderer.enabled = true;
-        _addForceThrowingTimer = 1f;
+        _addForceThrowingTimer = 0f;
 
         _granadeBullet = Instantiate(_granadePrefub);
-        DamageModel damageModel = new DamageModel(_idNameAttacker, _idWeapon, _damage);
-        _granadeBullet.SetDamageModel = damageModel;
+       
     }
     public override void StopShoot()
     {
@@ -129,13 +134,11 @@ public class HandWeapon : BaseWeapon
             _fireTimer = 0f;
             _lineRenderer.enabled = false;
             _isAiming = false;
-            _granadeBullet.Shoot(targetPositions);
+
+            DamageModel damageModel = new DamageModel(_parentUnit.UnitBaseName, _idWeapon, _damage);
+
+            _granadeBullet.Shoot(targetPositions, damageModel);
             _granadeBullet = null;
         }
-    }
-
-    public override void GetInfoBaseUnit(string name)
-    {
-        _idNameAttacker = name;
     }
 }

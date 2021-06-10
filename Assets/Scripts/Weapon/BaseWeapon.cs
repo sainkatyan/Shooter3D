@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class BaseWeapon : MonoBehaviour
 {
+    protected UnitBase _parentUnit;
+
     protected int _idWeapon;
     protected float _timeFireRate;
     protected float _timeRecharge;
@@ -23,5 +25,8 @@ public abstract class BaseWeapon : MonoBehaviour
     public abstract void StartShoot();
     public abstract void StopShoot();
 
-    public abstract void GetInfoBaseUnit(string name);
+    public virtual void SetInfoBaseUnit(UnitBase unitBase)
+    {
+        _parentUnit = unitBase;
+    }
 }

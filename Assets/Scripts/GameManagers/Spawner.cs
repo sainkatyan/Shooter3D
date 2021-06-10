@@ -13,6 +13,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private SpawnPoint[] _enemySpawnPoints;
     
     private const float rebirthTimer = 5f;
+    private static int index = 0;
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class Spawner : MonoBehaviour
         var spawnerUnit = Instantiate(unitPerson, spawnPoint.transform.position, Quaternion.identity);
         spawnerUnit.SetSpawnerTransform(spawnPoint);
         spawnerUnit.SetFraction(fraction);
-        spawnerUnit.UnitBaseName = fraction.ToString() + Random.Range(0, 30);
+        spawnerUnit.UnitBaseName = fraction.ToString() + " " + index++;
 
         UnitsHolder.AddUnit(spawnerUnit);
     }

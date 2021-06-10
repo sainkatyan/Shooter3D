@@ -17,11 +17,10 @@ public class Unit : UnitBase
 
         unitMovement.Init(inputController, cameraMovement);
         cameraMovement.Init(inputController, unitMovement);
+        shooting.Init(this);
     }
     private void Start()
     {
-        Cursor.visible = false;
         IsDead = false;
-        shooting.GetInfoFromBaseUnit(base.UnitBaseName);
     }
 }
