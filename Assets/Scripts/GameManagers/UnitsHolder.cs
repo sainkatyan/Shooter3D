@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitsHolder : MonoBehaviour
 {
     private static UnitsHolder instance;
-    public List<UnitBase> _units;
+    public static List<UnitBase> _units;
     private void Awake()
     {
         instance = this;
@@ -13,12 +13,20 @@ public class UnitsHolder : MonoBehaviour
     }
     public static void AddUnit(UnitBase unit)
     {
-        instance._units.Add(unit);
+        _units.Add(unit);
     }
 
     public static void RemoveUnit(UnitBase unit)
     {
-        instance._units.Remove(unit);
+        _units.Remove(unit);
         Destroy(unit.gameObject);
+    }
+
+    public static void UpdateMainCameraForUnits()
+    {
+        for (int i = 0; i < _units.Count; i++)
+        {
+            _units[i].GetComponent<Health>().FindMainCamera();
+        }
     }
 }

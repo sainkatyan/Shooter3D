@@ -55,8 +55,7 @@ public class Health : MonoBehaviour
     {
         _unitBase = GetComponent<UnitBase>();
         SetProgressBarColor(_unitBase);
-
-        if (_mainCameraTrans != null)
+        if (_mainCameraTrans == null)
         {
             _mainCameraTrans = Camera.main.transform;
         }
@@ -88,6 +87,11 @@ public class Health : MonoBehaviour
         {
             indicator.transform.LookAt(_mainCameraTrans);
         }
+    }
+
+    public void FindMainCamera()
+    {
+        _mainCameraTrans = Camera.main.transform;
     }
 
     public void Heal(float amount)

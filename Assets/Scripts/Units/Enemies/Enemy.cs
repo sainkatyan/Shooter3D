@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : UnitBase
 {
     [SerializeField]private WeaponController weaponController;
-    public Collider unitTargetCollider;
+    private Collider unitTargetCollider;
     //public UnitBase unitTarget;
 
     private void Awake()

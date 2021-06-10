@@ -47,6 +47,11 @@ public class Spawner : MonoBehaviour
         spawnerUnit.UnitBaseName = fraction.ToString() + " " + index++;
 
         UnitsHolder.AddUnit(spawnerUnit);
+
+        if (spawnerUnit.fraction == FractionUnit.Blue)
+        {
+            UnitsHolder.UpdateMainCameraForUnits();
+        }
     }
 
     public static void KillEnemyUnit(UnitBase unitPerson, DamageModel damageModel)
